@@ -56,6 +56,8 @@ class Point(object):
         self.py = b
         self.q = 0
         self.q1 = 0
+        self.hx = 0
+        self.hy = 0
 
     def __repr__(self):
         return "Point({}, {})".format(self.x, self.y)
@@ -98,6 +100,11 @@ class Point(object):
             return p2
         else:
             return p3
+
+    def halfway_to(self, p2):
+        self.hx = (self.x + p2.x) / 2
+        self.hy = (self.y + p2.y) / 2
+        return Point(self.hx, self.hy)
 
 
 def run_test_init():
@@ -1098,6 +1105,32 @@ def run_test_halfway_to():
     print('-----------------------------------------------------------')
     print('Testing the   halfway_to   method of the Point class.')
     print('-----------------------------------------------------------')
+
+    p1 = Point(10, 20)
+    p2 = Point(30, 100)
+
+    print()
+    print('Should be: Point(20.0, 60.0)')
+    print('Actual is:', p1.halfway_to(p2))
+    print('Should be: Point(20.0, 60.0)')
+    print('Actual is:', p2.halfway_to(p1))
+
+    print()
+    print('Should be: Point(10.0, 20.0)')
+    print('Actual is:', p1.halfway_to(p1))
+
+    p3 = Point(-10, 20)
+    p4 = Point(30, -100)
+
+    print()
+    print('Should be: Point(10.0, -40.0)')
+    print('Actual is:', p3.halfway_to(p4))
+    print('Should be: Point(10.0, -40.0)')
+    print('Actual is:', p3.halfway_to(p4))
+
+    print()
+    print('Should be: Point(-10.0, 20.0)')
+    print('Actual is:', p3.halfway_to(p3))
 
 
 # ------------------------------------------------------------------------------
